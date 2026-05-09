@@ -1,0 +1,209 @@
+Step 1: Formspree par account bana
+
+https://formspree.io
+ par jaa ke free account bana le.
+
+Login karne ke baad “New Project” bana.
+
+“Add Form” kar aur apni website ki email (jaise tusharpandav@mtfi@gmail.com) de.
+
+Formspree tujhe ek unique form endpoint dega, kuch aisa dikhega:
+
+https://formspree.io/f/abcxyz123
+
+
+Is URL ko copy kar le.
+
+Step 2: React Inquiry component update kar
+
+Apne inquiry component ke handleSubmit function mein formspree URL ko update kar dena.
+
+const formspreeURL = "https://formspree.io/f/abcxyz123"; // apna actual URL yahan dalein
+
+Step 3: Full Inquiry.jsx example with Formspree and email duplicate check
+import React, { useState } from "react";
+
+const Inquiry = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    pincode: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState("idle"); // idle, sending, success, error
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check duplicate email in localStorage
+    const submittedEmails = JSON.parse(localStorage.getItem("submittedEmails")) || [];
+    if (submittedEmails.includes(formData.email)) {
+      alert("You have already submitted an inquiry with this email.");
+      return;
+    }
+
+    setStatus("sending");
+
+    const formspreeURL = "https://formspree.io/f/abcxyz123"; // apna URL yahan dalein
+
+    try {
+      const response = await fetch(formspreeURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        alert("Your inquiry has been submitted successfully!");
+
+        // Store email to prevent duplicate submissions
+        const updatedEmails = [...submittedEmails, formData.email];
+        localStorage.setItem("submittedEmails", JSON.stringify(updatedEmails));
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          address: "",
+          pincode: "",
+          message: "",
+        });
+      } else {
+        const data = await response.json();
+        if (data.errors) {
+          alert(data.errors.map((error) => error.message).join(", "));
+        } else {
+          alert("Oops! There was a problem submitting your form");
+        }
+        setStatus("error");
+      }
+    } catch (error) {
+      alert("Network error: " + error.message);
+      setStatus("error");
+    }
+  };
+
+  return (
+    <div className="flex justify-center items-center mt-5 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-xl w-full bg-white p-8 rounded shadow">
+        <h2 className="text-3xl font-bold text-blue-600 mb-6">
+          Request a PANDAV SOLAR Inquiry
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Same form inputs as before */}
+          {/* Full Name */}
+          <div>
+            <label className="block text-gray-700 mb-1">Full Name</label>
+            <input
+              type="text"
+              name="name"
+              required
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded"
+              placeholder="Your Name"
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-gray-700 mb-1">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="block text-gray-700 mb-1">Phone Number</label>
+            <input
+              type="tel"
+              name="phone"
+              required
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded"
+              placeholder="+91 12345 67890"
+            />
+          </div>
+
+          {/* Address */}
+          <div>
+            <label className="block text-gray-700 mb-1">Installation Address</label>
+            <input
+              type="text"
+              name="address"
+              required
+              value={formData.address}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded"
+              placeholder="123 Solar Street, India"
+            />
+          </div>
+
+          {/* Pincode */}
+          <div>
+            <label className="block text-gray-700 mb-1">PinCode</label>
+            <input
+              type="number"
+              name="pincode"
+              required
+              value={formData.pincode}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded"
+              placeholder="146525"
+            />
+          </div>
+
+          {/* Message */}
+          <div>
+            <label className="block text-gray-700 mb-1">Your Message</label>
+            <textarea
+              name="message"
+              rows="4"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded"
+              placeholder="Tell us more about your solar needs..."
+            ></textarea>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className={`w-full py-3 rounded text-white transition ${
+              status === "sending"
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600"
+            }`}
+          >
+            {status === "sending" ? "Submitting..." : "Submit Inquiry"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Inquiry;
