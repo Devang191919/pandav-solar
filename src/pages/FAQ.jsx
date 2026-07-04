@@ -1,58 +1,73 @@
-// pages/FAQ.jsx
 import React, { useState } from "react";
+import { siteConfig } from "../config/siteConfig";
+import BannerSec from "../components/BennerSec";
 import FAQAccordion from "../components/FAQAccordion";
 
 const faqData = [
   {
     question: "What services does Pandav Solar provide?",
     answer:
-      "We provide solar panel installation, maintenance, and consultation services for residential and commercial needs. Our solutions are customized to maximize efficiency and savings.",
+      "We install solar rooftop systems, handle government liaisoning & net-meter work, and provide solar water heaters for homes, shops, and industries.",
   },
   {
     question: "How long does installation take?",
     answer:
-      "Installation typically takes 3 to 7 business days, depending on your property size and system requirements. Our expert team ensures seamless and timely completion.",
+      "Most installations take 3 to 7 days depending on system size. We keep you updated at every step.",
   },
   {
     question: "Is government subsidy available?",
     answer:
-      "Yes, government subsidies and incentives are available for solar installations. We assist you in understanding and applying for all eligible benefits.",
+      "Yes! We help you understand and apply for all eligible solar subsidies in Gujarat.",
   },
   {
-    question: "Do you offer maintenance services?",
+    question: "Do you offer maintenance?",
     answer:
-      "Absolutely! We provide comprehensive maintenance plans, including system monitoring, cleaning, and repairs to keep your solar setup running at peak performance.",
+      "Yes — we offer cleaning, monitoring, and repair services to keep your system running efficiently.",
   },
   {
-    question: "What is the warranty period for your solar panels?",
+    question: "What warranty do you provide?",
     answer:
-      "Our solar panels come with a 25-year performance warranty, ensuring durability and long-term reliability for your energy needs.",
+      "Solar panels come with up to 25-year performance warranty. We use trusted brands only.",
   },
 ];
 
-const FAQ = () => {
+const FAQ = ({ embedded = false }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
-  const handleToggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const list = (
+    <div className="card p-4 md:p-5 max-w-3xl mx-auto">
+      {faqData.map((item, index) => (
+        <FAQAccordion
+          key={item.question}
+          question={item.question}
+          answer={item.answer}
+          isOpen={openIndex === index}
+          onClick={() => setOpenIndex(openIndex === index ? null : index)}
+        />
+      ))}
+    </div>
+  );
+
+  if (embedded) {
+    return (
+      <>
+        <div className="text-center mb-6">
+          <span className="section-badge">FAQ</span>
+          <h2 className="mt-3 text-2xl font-bold text-solar-900">Common Questions</h2>
+        </div>
+        {list}
+      </>
+    );
+  }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-12 py-16">
-      <h1 className="text-5xl leading-15.5 font-extrabold text-center text-blue-700 mb-10">
-        Frequently Asked Questions
-      </h1>
-
-      <div className="bg-white shadow-lg rounded-xl p-8">
-        {faqData.map((item, index) => (
-          <FAQAccordion
-            key={index}
-            question={item.question}
-            answer={item.answer}
-            isOpen={openIndex === index}
-            onClick={() => handleToggle(index)}
-          />
-        ))}
+    <div>
+      <BannerSec title="FAQ" subtitle="FAQ" bgImage={siteConfig.images.service} />
+      <div className="container-main section-block">
+        <p className="text-center text-solar-700 mb-6 text-sm">
+          Answers to questions our customers ask most often.
+        </p>
+        {list}
       </div>
     </div>
   );

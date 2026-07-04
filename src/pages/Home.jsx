@@ -1,68 +1,84 @@
 import React from "react";
-import solarBg from "../assets/solar-bg.jpg";
 import { NavLink } from "react-router-dom";
-import { FaArrowRightLong } from "react-icons/fa6";
-import Servicessec from "../components/ServiceSec";
+import HeroSection from "../components/HeroSection";
+import TrustBar from "../components/TrustBar";
+import ServiceCards from "../components/ServiceCards";
+import HowItWorks from "../components/HowItWorks";
 import AboutSec from "../components/AboutSec";
+import ProjectGallery from "../components/ProjectGallery";
+import Testimonials from "../components/Testimonials";
+import CTABanner from "../components/CTABanner";
 import ContactSec from "../components/ContactSec";
 import FAQ from "./FAQ";
-import AnimatedHeading from "../components/AnimatedHeading";
 
 const Home = () => {
   return (
     <div>
-      <div
-        className="h-screen w-full bg-cover bg-center flex items-center justify-start"
-        style={{ backgroundImage: `url(${solarBg})` }}
-      >
-        <div className="max-w-[1920px] w-full px-4 sm:px-6 lg:px-8 mx-auto">
-          <div className="py-6 max-w-[850PX] text-start">
-            <h1 className="text-blue-500 text-7xl font-bold mb-4 leading-tight space-x-2 max-lg:text-5xl max-lg:leading-snug">
-              <AnimatedHeading text="WELCOME TO PANDAV SOLAR" />
-            </h1>
-          </div>
+      <HeroSection />
+      <TrustBar overlap />
 
-          <div className=" max-w-4xl text-start">
-            <p className="text-black font-semibold text-2xl mb-8 leading-[1.7] max-lg:text-lg ">
-              Harness the Power of the Sun with Our Cutting-Edge Solar Solutions
-              Tailored for Your Home and Business Needs.
+      <section className="section-block bg-white">
+        <div className="container-main">
+          <div className="text-center mb-8">
+            <span className="section-badge">Our Services</span>
+            <h2 className="mt-3 text-2xl md:text-3xl font-bold text-solar-900">
+              Solar Solutions for Every Need
+            </h2>
+            <p className="mt-2 text-solar-700 text-sm md:text-base">
+              Home, shop, factory or hotel — we install and maintain it all.
             </p>
-
-            <div className="flex space-x-13 font-medium max-lg:flex-col max-lg:space-x-0 max-lg:space-y-8">
-              <NavLink to="/about">
-                <button className="group bg-blue-500 text-white px-12 text-xl py-4 rounded hover:bg-blue-600 transition flex items-center gap-2 max-lg:text-base">
-                  About Us
-                  <FaArrowRightLong className="transition-transform duration-300 group-hover:translate-x-2" />
-                </button>
-              </NavLink>
-
-              <NavLink to="/services">
-                <button className="group bg-black text-white px-12 text-xl py-4 rounded  transition flex items-center gap-2 max-lg:text-base">
-                  Our Services
-                  <FaArrowRightLong className="transition-transform duration-300 group-hover:translate-x-2" />
-                </button>
-              </NavLink>
-            </div>
+          </div>
+          <ServiceCards />
+          <div className="text-center mt-6">
+            <NavLink to="/services" className="btn-secondary text-sm">
+              View All Services →
+            </NavLink>
           </div>
         </div>
-      </div>
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8 py-8  text-center">
-        <h2 className="text-5xl font-bold">Our Services</h2>
-        <Servicessec />
-      </div>
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8 md:pt-8  text-center">
-        <h2 className="text-5xl font-bold">About </h2>
-        <AboutSec />
-      </div>
+      </section>
 
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8  text-center">
-        <FAQ />
-      </div>
+      <HowItWorks />
 
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8 md:py-8 py-4 text-center">
-        <h2 className="text-5xl mb-10 font-bold">Contact </h2>
-        <ContactSec />
-      </div>
+      <section className="section-block bg-slate-50">
+        <div className="container-main">
+          <div className="text-center mb-8">
+            <span className="section-badge">About Us</span>
+            <h2 className="mt-3 text-2xl md:text-3xl font-bold text-solar-900">
+              Your Local Solar Expert in Surat
+            </h2>
+          </div>
+          <AboutSec showWhyChooseUs={false} />
+          <div className="text-center mt-6">
+            <NavLink to="/about" className="text-solar-green font-semibold text-sm hover:underline">
+              Read more about us →
+            </NavLink>
+          </div>
+        </div>
+      </section>
+
+      <ProjectGallery limit={4} />
+      <Testimonials />
+
+      <section className="section-block bg-slate-50 border-t border-slate-200">
+        <FAQ embedded />
+      </section>
+
+      <CTABanner />
+
+      <section className="section-block bg-white" id="contact">
+        <div className="container-main">
+          <div className="text-center mb-6">
+            <span className="section-badge">Contact</span>
+            <h2 className="mt-3 text-2xl md:text-3xl font-bold text-solar-900">
+              Get Your Free Solar Assessment
+            </h2>
+            <p className="mt-2 text-solar-700 text-sm md:text-base">
+              Call, WhatsApp, or send a message — we reply within 24 hours.
+            </p>
+          </div>
+          <ContactSec />
+        </div>
+      </section>
     </div>
   );
 };

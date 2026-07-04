@@ -1,87 +1,95 @@
 import React from "react";
+import { FaCheck } from "react-icons/fa";
+import { siteConfig } from "../config/siteConfig";
+import OwnerImage from "../assets/Owner.jpeg";
 
-import about from "../assets/about-man.jpeg";
+const highlights = [
+  "Free site visit & roof assessment",
+  "Subsidy paperwork & net-meter support",
+  "Residential, commercial & industrial projects",
+  "Quality panels with long-term service",
+];
 
-const AboutSec = () => {
+const AboutSec = ({ showWhyChooseUs = true }) => {
+  const { stats } = siteConfig;
+
   return (
     <div>
-      <section className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 className="text-3xl font-bold mb-4">Who We Are</h2>
-          <p className="text-gray-700 font-medium leading-relaxed">
-            PANDAV SOLAR is a trusted renewable energy company dedicated to
-            delivering affordable and sustainable solar energy solutions. With
-            years of expertise, we specialize in turnkey solar projects,
-            liasoning services, rooftop installations, and solar water pumps.
-          </p>
-          <p className="text-gray-700 mt-4 font-medium leading-relaxed">
-            Our team is committed to empowering industries, businesses, and
-            households with eco-friendly energy solutions that reduce carbon
-            footprint and ensure long-term cost savings.
-          </p>
-        </div>
-        <div>
-          <img
-            src={about}
-            alt="About HM Solar"
-            className="rounded-xl shadow-lg"
-          />
-        </div>
-      </section>
+      <div className="card overflow-hidden">
+        <div className="grid md:grid-cols-2 md:items-stretch">
+          <div className="order-2 md:order-1 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-solar-900">
+              Who We Are
+            </h2>
 
-      {/* Mission & Vision */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
-          <div>
-            <h3 className="text-2xl font-bold text-green-600 mb-3">
-              Our Mission
-            </h3>
-            <p className="text-gray-700 leading-relaxed">
-              To accelerate the adoption of renewable energy in India by
-              providing innovative, reliable, and cost-effective solar solutions
-              for residential, commercial, and industrial customers.
+            <p className="mt-4 sm:mt-5 text-solar-700 text-sm sm:text-base md:text-[17px] leading-relaxed">
+              {siteConfig.companyName} helps homes and businesses in Surat switch to solar
+              with affordable, reliable installations. We handle everything — site survey,
+              design, installation, net-meter & subsidy support.
             </p>
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold text-green-600 mb-3">
-              Our Vision
-            </h3>
-            <p className="text-gray-700 leading-relaxed">
-              To become a leading solar energy company recognized for driving
-              sustainable growth, reducing dependency on fossil fuels, and
-              contributing to a greener planet for future generations.
+            <p className="mt-3 sm:mt-4 text-solar-700 text-sm sm:text-base md:text-[17px] leading-relaxed">
+              Based in Katargam, we serve customers across Surat and Gujarat with honest
+              guidance and on-time project delivery. No confusing jargon — just clear
+              answers and the right system for your roof and budget.
             </p>
-          </div>
-        </div>
-      </section>
+            <p className="mt-3 sm:mt-4 text-solar-700 text-sm sm:text-base md:text-[17px] leading-relaxed">
+              Our goal is simple: reduce your electricity bill and give you clean energy
+              that lasts for 25+ years.
+            </p>
 
-      {/* Why Choose Us */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-center mb-10">Why Choose Us</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-            <h4 className="font-semibold text-lg mb-2">Expertise</h4>
-            <p className="text-gray-600 text-sm">
-              Years of hands-on experience in designing and executing solar
-              projects across industries.
-            </p>
+            <ul className="mt-4 sm:mt-6 space-y-2.5 sm:space-y-3">
+              {highlights.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 sm:gap-3 text-solar-800 text-sm sm:text-base">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-solar-green/15 text-solar-green-dark">
+                    <FaCheck className="text-[10px]" />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-3 border-t border-slate-200 pt-5 sm:pt-6">
+              {[
+                { value: `${stats.years}+`, label: "Years" },
+                { value: `${stats.customers}+`, label: "Clients" },
+                { value: `${stats.mw}+ MW`, label: "Installed" },
+              ].map((item) => (
+                <div key={item.label} className="text-center sm:text-left">
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold text-solar-green-dark">
+                    {item.value}
+                  </p>
+                  <p className="text-[11px] sm:text-xs md:text-sm text-solar-700 mt-0.5">{item.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-            <h4 className="font-semibold text-lg mb-2">Quality</h4>
-            <p className="text-gray-600 text-sm">
-              High-quality materials and latest technology to ensure durability
-              and efficiency.
-            </p>
-          </div>
-          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-            <h4 className="font-semibold text-lg mb-2">Support</h4>
-            <p className="text-gray-600 text-sm">
-              End-to-end assistance from consultation to post-installation
-              maintenance.
-            </p>
+
+          <div className="order-1 md:order-2 relative min-h-[240px] sm:min-h-[280px] md:min-h-0">
+            <img
+              src={OwnerImage}
+              alt={`${siteConfig.ownerName}, ${siteConfig.ownerTitle}`}
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/85 via-slate-900/50 to-transparent px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6">
+              <p className="text-base sm:text-lg md:text-xl font-bold text-white">
+                {siteConfig.ownerName}
+              </p>
+              <p className="text-sm text-slate-200 mt-0.5">{siteConfig.ownerTitle}</p>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {showWhyChooseUs && (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+          {siteConfig.whyChooseUs.slice(0, 4).map((item) => (
+            <div key={item.title} className="card p-4">
+              <h4 className="font-semibold text-solar-900 text-sm">{item.title}</h4>
+              <p className="text-solar-700 text-xs mt-1 leading-relaxed">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,1 +1,267 @@
 @import "tailwindcss";
+
+@theme {
+  --color-solar-950: #0a0f1a;
+  --color-solar-900: #111827;
+  --color-solar-800: #1e293b;
+  --color-solar-700: #475569;
+  --color-solar-green: #059669;
+  --color-solar-green-light: #10b981;
+  --color-solar-green-dark: #047857;
+  --color-solar-amber: #f59e0b;
+  --color-solar-amber-light: #fbbf24;
+  --color-solar-amber-dark: #d97706;
+  --color-solar-cream: #f8fafc;
+  --color-solar-surface: #ffffff;
+  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-solar-900);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-solar-green-light);
+  color: white;
+}
+
+.container-main {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+@media (min-width: 640px) {
+  .container-main {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}
+
+/* Mobile-first touch & form fixes */
+@media (max-width: 639px) {
+  .btn-primary,
+  .btn-call,
+  .btn-whatsapp,
+  .btn-secondary,
+  .btn-light {
+    min-height: 2.75rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .input-field,
+  .input-field select {
+    font-size: 1rem;
+  }
+
+  .section-block {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+.btn-mobile-full {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .btn-mobile-full {
+    width: auto;
+  }
+}
+
+.mobile-bottom-bar {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.section-badge {
+  display: inline-block;
+  padding: 0.35rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-solar-green-dark);
+  background: rgb(16 185 129 / 0.1);
+  border-radius: 9999px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: white;
+  background: var(--color-solar-green);
+  border-radius: 0.75rem;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 14px rgb(5 150 105 / 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--color-solar-green-dark);
+  transform: translateY(-1px);
+}
+
+.btn-call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: white;
+  background: var(--color-solar-green);
+  border-radius: 0.75rem;
+  transition: background 0.2s;
+}
+
+.btn-call:hover {
+  background: var(--color-solar-green-dark);
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: white;
+  background: #25d366;
+  border-radius: 0.75rem;
+  transition: background 0.2s;
+}
+
+.btn-whatsapp:hover {
+  background: #1fb855;
+}
+
+.brand-logo {
+  display: block;
+  height: 2.75rem;
+  width: auto;
+  max-width: 10.5rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.brand-logo--footer {
+  height: 3.5rem;
+  max-width: 12.5rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 639px) {
+  .brand-logo {
+    height: 2.375rem;
+    max-width: 8.75rem;
+  }
+
+  .brand-logo--footer {
+    height: 3rem;
+    max-width: 10.5rem;
+  }
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  font-weight: 600;
+  color: var(--color-solar-800);
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.75rem;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-solar-green);
+  color: var(--color-solar-green-dark);
+}
+
+.btn-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: white;
+  background: transparent;
+  border: 2px solid rgb(255 255 255 / 0.85);
+  border-radius: 0.75rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-light:hover {
+  background: rgb(255 255 255 / 0.12);
+  border-color: white;
+}
+
+.section-block {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-block {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  font-size: 0.9375rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-solar-green);
+  box-shadow: 0 0 0 3px rgb(16 185 129 / 0.12);
+}
+
+.card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.04);
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.06);
+}
+
+/* Space for mobile bottom action bar */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0));
+  }
+}

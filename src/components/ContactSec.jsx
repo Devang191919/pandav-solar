@@ -1,161 +1,151 @@
-import React, { useState } from "react";
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
-import newLogo from "../assets/new-logo.jpg";
-import emailjs from "emailjs-com";
+import React from "react";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaWhatsapp, FaClock } from "react-icons/fa";
+import { siteConfig } from "../config/siteConfig";
+import ContactLink from "./ContactLink";
+import { sendContactEmail } from "../utils/emailjs";
 
-const ContactSec = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false);
-
-  // Replace these with your EmailJS keys
-  const SERVICE_ID = "service_h4y1k8m";
-  const TEMPLATE_ID = "template_c5ctbt6";
-  const USER_ID = "saZNyF6d7aBQXU0TH";
+const ContactSec = ({ showMap = true }) => {
+  const [form, setForm] = React.useState({ name: "", email: "", message: "" });
+  const [submitted, setSubmitted] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+    setError("");
     if (!form.name || !form.email || !form.message) {
-      alert("All fields are required!");
+      setError("Please fill all fields.");
       return;
     }
-
-    // Send email using EmailJS
-    emailjs
-      .send(SERVICE_ID, TEMPLATE_ID, form, USER_ID)
-      .then((response) => {
-        // Add email to localStorage
-
-        setSubmitted(true);
-        setFadeOut(false);
-        setForm({ name: "", email: "", message: "" });
-
-        setTimeout(() => setFadeOut(true), 3000);
-        setTimeout(() => setSubmitted(false), 3500);
-      })
-      .catch((err) => {
-        alert("Failed to send message. Please try again.");
-        console.error("EmailJS error:", err);
-      });
+    setLoading(true);
+    try {
+      await sendContactEmail(form);
+      setSubmitted(true);
+      setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch {
+      setError("Could not send. Please call or WhatsApp us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div>
-      <div className="bg-cover bg-center flex items-center justify-center px-6 py-20 bg-gray-100">
-        <div className="max-w-6xl w-full bg-white rounded-lg shadow-lg grid md:grid-cols-2">
-          {/* Left: Contact Info */}
-          <div className="bg-[#111827] text-white p-10 rounded-l-lg">
-            <img src={newLogo} alt="Logo" className="w-40 mb-5" />
-            <p className="text-gray-300 mb-5">
-              We'd love to hear from you! Whether you have questions about our
-              services, need support, or just want to say hello, feel free to
-              reach out.
-            </p>
+    <div className="card overflow-hidden">
+      <div className="grid lg:grid-cols-2 lg:items-stretch">
+        {/* Left — contact actions */}
+        <div className="p-4 sm:p-5 md:p-6 bg-green-50 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col">
+          <h3 className="text-base font-bold text-solar-900">Talk to Us Directly</h3>
+          <p className="text-xs text-solar-700 mt-1 mb-4">
+            Fastest way to get a free solar assessment
+          </p>
 
-            <div className="space-y-5">
-              {/* Address */}
-              <div className="flex items-center gap-3">
-                <div className="bg-white text-black p-3 rounded-full">
-                  <FaMapMarkerAlt size={16} />
-                </div>
-                <div className="text-start">
-                  <h4 className="text-lg font-semibold text-cyan-400">
-                    Address
-                  </h4>
-                  <p className="text-sm text-gray-300">
-                    123 Solar Street, India
-                  </p>
-                </div>
-              </div>
+          <div className="space-y-2.5">
+            <a href={`tel:${siteConfig.phone}`} className="btn-call w-full !py-2.5 text-sm">
+              <FaPhoneAlt /> Call {siteConfig.phoneDisplay}
+            </a>
+            <ContactLink
+              type="whatsapp"
+              message="Hello Pandav Solar!"
+              className="btn-whatsapp w-full !py-2.5 text-sm"
+            >
+              <FaWhatsapp /> Chat on WhatsApp
+            </ContactLink>
+          </div>
 
-              {/* Phone */}
-              <div className="flex items-center gap-3">
-                <div className="bg-white text-black p-3 rounded-full">
-                  <FaPhoneAlt size={16} />
-                </div>
-                <div className="text-start">
-                  <h4 className="text-lg font-semibold text-cyan-400">Phone</h4>
-                  <p className="text-sm text-gray-300">7069216551</p>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="flex items-center gap-3">
-                <div className="bg-white text-black p-3 rounded-full">
-                  <FaEnvelope size={16} />
-                </div>
-                <div className="text-start">
-                  <h4 className="text-lg font-semibold text-cyan-400">Email</h4>
-                  <p className="text-sm text-gray-300">
-                    tusharpandav.mtfi@gmail.com
-                  </p>
-                </div>
-              </div>
+          <div className="mt-4 pt-4 border-t border-green-100 space-y-3 flex-1">
+            <ContactLink
+              type="email"
+              className="flex items-center gap-2.5 text-sm text-solar-700 hover:text-solar-green break-all"
+            >
+              <span className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 border border-slate-200">
+                <FaEnvelope className="text-solar-green text-xs" />
+              </span>
+              {siteConfig.email}
+            </ContactLink>
+            <ContactLink
+              type="address"
+              className="flex items-start gap-2.5 text-sm text-solar-700 hover:text-solar-green"
+            >
+              <span className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 border border-slate-200 mt-0.5">
+                <FaMapMarkerAlt className="text-solar-green text-xs" />
+              </span>
+              <span className="leading-snug">{siteConfig.address}</span>
+            </ContactLink>
+            <div className="flex items-center gap-2.5 text-sm text-solar-700">
+              <span className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 border border-slate-200">
+                <FaClock className="text-solar-green text-xs" />
+              </span>
+              {siteConfig.hours}
             </div>
           </div>
+        </div>
 
-          {/* Right: Contact Form */}
-          <div className="p-10">
-            <h3 className="text-2xl font-bold mb-6 text-gray-800">
-              Send Message
-            </h3>
+        {/* Right — form */}
+        <div className="p-4 sm:p-5 md:p-6 flex flex-col">
+          <h3 className="text-base font-bold text-solar-900">Or Send a Message</h3>
+          <p className="text-xs text-solar-700 mt-1 mb-4">We reply within 24 hours.</p>
 
-            {submitted && (
-              <div
-                className={`bg-green-100 text-green-800 p-3 rounded text-center mb-4 transition-opacity duration-1000 ${
-                  fadeOut ? "opacity-0" : "opacity-100"
-                }`}
-              >
-                Thank you for reaching out! We will get back to you soon.
-              </div>
-            )}
+          {submitted && (
+            <div className="bg-green-50 text-green-800 p-3 rounded-lg text-sm mb-3 border border-green-200">
+              ✓ Message sent! We will contact you soon.
+            </div>
+          )}
+          {error && (
+            <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm mb-3">{error}</div>
+          )}
 
-            <form onSubmit={handleFormSubmit} className="space-y-5">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                className="w-full border-b border-gray-400 focus:outline-none py-2"
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                className="w-full border-b border-gray-400 focus:outline-none py-2"
-              />
-
-              <textarea
-                name="message"
-                placeholder="Type your Message..."
-                rows="4"
-                value={form.message}
-                onChange={handleChange}
-                required
-                className="w-full border-b border-gray-400 focus:outline-none py-2"
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-cyan-500 text-white py-2 font-semibold rounded-md hover:bg-cyan-600 transition"
-              >
-                Send
-              </button>
-            </form>
-          </div>
+          <form onSubmit={handleFormSubmit} className="space-y-3 flex-1 flex flex-col">
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name *"
+              value={form.name}
+              onChange={handleChange}
+              required
+              className="input-field !py-2.5"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email *"
+              value={form.email}
+              onChange={handleChange}
+              required
+              className="input-field !py-2.5"
+            />
+            <textarea
+              name="message"
+              placeholder="How can we help you? *"
+              rows={3}
+              value={form.message}
+              onChange={handleChange}
+              required
+              className="input-field resize-none !py-2.5 flex-1 min-h-[88px]"
+            />
+            <button type="submit" disabled={loading} className="btn-primary w-full !py-2.5 mt-auto">
+              {loading ? "Sending..." : "Send Message"}
+            </button>
+          </form>
         </div>
       </div>
+
+      {showMap && (
+        <iframe
+          title="Pandav Solar location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.0!2d72.8091256!3d21.2251811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04f6b697a1a81%3A0x6781bdbb2cc4e514!2sSinganpor!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+          width="100%"
+          height="200"
+          className="border-t border-slate-200 block w-full h-[200px] sm:h-[240px] md:h-[280px]"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+        />
+      )}
     </div>
   );
 };
