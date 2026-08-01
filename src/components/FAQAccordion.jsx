@@ -9,13 +9,13 @@ const FAQAccordion = ({ question, answer, isOpen, onClick }) => {
         className="flex justify-between items-center w-full text-left gap-4"
         aria-expanded={isOpen}
       >
-        <span className="font-semibold text-solar-900 text-sm md:text-base">{question}</span>
+        <span className="font-semibold text-solar-900 text-base md:text-lg">{question}</span>
         <span className="shrink-0 w-7 h-7 rounded-full bg-green-50 text-solar-green flex items-center justify-center">
           {isOpen ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
         </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-48 mt-3" : "max-h-0"}`}>
-        <p className="text-solar-700 text-sm leading-relaxed">{answer}</p>
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[28rem] mt-3" : "max-h-0"}`}>
+        <p className="text-solar-700 text-sm md:text-base leading-relaxed">{answer}</p>
       </div>
     </div>
   );

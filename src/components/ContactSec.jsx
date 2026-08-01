@@ -35,7 +35,7 @@ const ContactSec = ({ showMap = true }) => {
   };
 
   return (
-    <div className="card overflow-hidden">
+    <div className="card overflow-hidden mb-2 lg:mb-0">
       <div className="grid lg:grid-cols-2 lg:items-stretch">
         {/* Left — contact actions */}
         <div className="p-4 sm:p-5 md:p-6 bg-green-50 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col">
@@ -44,16 +44,19 @@ const ContactSec = ({ showMap = true }) => {
             Fastest way to get a free solar assessment
           </p>
 
-          <div className="space-y-2.5">
-            <a href={`tel:${siteConfig.phone}`} className="btn-call w-full !py-2.5 text-sm">
-              <FaPhoneAlt /> Call {siteConfig.phoneDisplay}
+          <div className="grid grid-cols-2 gap-2.5">
+            <a
+              href={`tel:${siteConfig.phone}`}
+              className="btn-call !py-2.5 text-sm justify-center"
+            >
+              <FaPhoneAlt /> Call
             </a>
             <ContactLink
               type="whatsapp"
               message="Hello Pandav Solar!"
-              className="btn-whatsapp w-full !py-2.5 text-sm"
+              className="btn-whatsapp !py-2.5 text-sm justify-center"
             >
-              <FaWhatsapp /> Chat on WhatsApp
+              <FaWhatsapp /> WhatsApp
             </ContactLink>
           </div>
 

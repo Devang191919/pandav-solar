@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
-import { FaSolarPanel, FaWhatsapp } from "react-icons/fa6";
 import { MdCall } from "react-icons/md";
 import { siteConfig, getTelUrl } from "../config/siteConfig";
-import ContactLink from "./ContactLink";
 
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
+  { to: "/projects", label: "Projects" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
   { to: "/faq", label: "FAQ" },
@@ -17,13 +16,22 @@ const navLinks = [
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
+
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-slate-100 pt-[env(safe-area-inset-top)]">
       <div className="container-main">
-        <div className="flex justify-between items-center h-14 sm:h-16 gap-2">
+        <div className="flex justify-between items-center h-[4.25rem] sm:h-[4.75rem] lg:h-[5.25rem] gap-2">
           <NavLink
             to="/"
-            className="flex items-center gap-2.5 min-w-0 shrink"
+            className="flex items-center min-w-0 shrink"
             onClick={() => setIsOpen(false)}
           >
             <img
@@ -31,9 +39,6 @@ const Header = () => {
               alt={siteConfig.companyName}
               className="brand-logo"
             />
-            <span className="hidden sm:block text-[18px] leading-tight text-solar-green font-semibold  tracking-wide">
-              Pandav Solar
-            </span>
           </NavLink>
 
           <nav className="hidden lg:flex items-center gap-1">
@@ -43,8 +48,8 @@ const Header = () => {
                 to={link.to}
                 className={({ isActive }) =>
                   isActive
-                    ? "px-3 py-2 text-solar-green font-semibold text-sm"
-                    : "px-3 py-2 text-solar-700 hover:text-solar-green text-sm font-medium transition"
+                    ? "px-3 py-2 text-solar-green font-semibold text-[16px]"
+                    : "px-3 py-2 text-solar-700 hover:text-solar-green text-[16px] font-medium transition"
                 }
               >
                 {link.label}
@@ -75,7 +80,7 @@ const Header = () => {
       </div>
 
       {isOpen && (
-        <div className="lg:hidden border-t bg-white px-4 py-4 space-y-1 shadow-lg max-h-[calc(100dvh-3.5rem)] overflow-y-auto">
+        <div className="lg:hidden border-t bg-white shadow-lg px-4 py-3 space-y-1">
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
@@ -90,19 +95,6 @@ const Header = () => {
               {link.label}
             </NavLink>
           ))}
-          <a href={getTelUrl()} className="btn-call w-full mt-2">
-            <MdCall /> Call {siteConfig.phoneDisplay}
-          </a>
-          <ContactLink
-            type="whatsapp"
-            message="Hi Pandav Solar!"
-            className="btn-whatsapp w-full mt-2"
-          >
-            <FaWhatsapp /> WhatsApp
-          </ContactLink>
-          <NavLink to="/inquiry" onClick={() => setIsOpen(false)} className="btn-primary w-full mt-2">
-            Get Free Quote
-          </NavLink>
         </div>
       )}
     </header>

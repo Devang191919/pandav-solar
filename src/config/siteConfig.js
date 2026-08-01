@@ -4,11 +4,12 @@ import instalation from "../assets/instalation.jpg";
 import rooftop from "../assets/ROOFTOP.jpg";
 import waterHeater from "../assets/WATER-HEETER.jpg";
 import aboutImg from "../assets/about-man.jpeg";
-import newLogo from "../assets/new-logo.jpg";
+import mainLogo from "../assets/Main-logo-ps.png";
 import project1 from "../assets/project-1.jpg";
 import project2 from "../assets/project-2.jpg";
 import project3 from "../assets/project-3.jpg";
 import project4 from "../assets/project-4.jpg";
+import OwnerImage from "../assets/Owner.jpeg";
 
 export const siteConfig = {
   companyName: "Pandav Solar",
@@ -31,7 +32,7 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/pandavsolar",
   },
   stats: {
-    years: 5,
+    years: 9,
     workforce: 15,
     customers: 200,
     mw: 2,
@@ -43,28 +44,98 @@ export const siteConfig = {
     rooftop,
     waterHeater,
     about: aboutImg,
-    logo: newLogo,
+    logo: mainLogo,
   },
+  /** Home hero slider slides (Meghji-style auto-rotate) */
+  heroSlides: [
+    {
+      image: solarBg,
+      badge: "Trusted Solar Company in Surat",
+      title: "Switch to Solar &",
+      highlight: "Save on Electricity Bills",
+      text: "Save on electricity bills with expert solar installation for your home, shop, or factory. Free site visit in Surat & Gujarat.",
+    },
+    {
+      image: rooftop,
+      badge: "Residential & Commercial EPC",
+      title: "Clean Energy for",
+      highlight: "Every Roof in Surat",
+      text: "Custom rooftop systems designed for homes, shops, hotels, and factories — from survey to net-meter commissioning.",
+    },
+    {
+      image: instalation,
+      badge: "Expert Installation Team",
+      title: "Quality Install with",
+      highlight: "Local Support You Trust",
+      text: "Professional mounting, wiring, and after-sales care from a Katargam-based team that stays with you.",
+    },
+    {
+      image: serviceImg,
+      badge: "Subsidy & Approvals Help",
+      title: "From Paperwork to",
+      highlight: "Power On Your Meter",
+      text: "We guide subsidy eligibility and handle DISCOM paperwork so you can focus on savings, not forms.",
+    },
+  ],
   projects: [
     {
-      title: "Solar Rooftop System",
-      location: "Katargam, Surat, Gujarat 395004",
+      title: "Residential Rooftop Solar",
+      location: "Katargam, Surat, Gujarat",
+      capacity: "5 kW",
+      type: "Residential",
       image: project1,
     },
     {
-      title: "Solar Rooftop System",
-      location: "Adajan, Surat, Gujarat 395009",
+      title: "Commercial Rooftop System",
+      location: "Adajan, Surat, Gujarat",
+      capacity: "25 kW",
+      type: "Commercial",
       image: project2,
     },
     {
-      title: "Solar Rooftop System",
-      location: "Vesu, Surat, Gujarat 395007",
+      title: "Industrial Solar Installation",
+      location: "Vesu, Surat, Gujarat",
+      capacity: "100 kW",
+      type: "Industrial",
       image: project3,
     },
     {
-      title: "Solar Rooftop System",
-      location: "Ring Road, Surat, Gujarat 395002",
+      title: "Shop & Office Rooftop",
+      location: "Ring Road, Surat, Gujarat",
+      capacity: "10 kW",
+      type: "Commercial",
       image: project4,
+    },
+    {
+      title: "Home Solar with Net Meter",
+      location: "Singanpore, Surat, Gujarat",
+      capacity: "3 kW",
+      type: "Residential",
+      image: project1,
+    },
+    {
+      title: "Factory Rooftop EPC",
+      location: "Sachin, Surat, Gujarat",
+      capacity: "200 kW",
+      type: "Industrial",
+      image: project2,
+    },
+  ],
+  team: [
+    {
+      name: "Tushar Pandav",
+      role: "Founder",
+      image: OwnerImage,
+    },
+    {
+      name: "Installation Team",
+      role: "Field Engineers",
+      image: null,
+    },
+    {
+      name: "Support Desk",
+      role: "Customer Care",
+      image: null,
     },
   ],
   whyChooseUs: [
@@ -93,6 +164,55 @@ export const siteConfig = {
       description:
         "Choosing solar saves money and helps build a cleaner earth for future generations.",
     },
+    {
+      title: "Local Surat Team",
+      description:
+        "Based in Katargam — fast site visits, quick support, and projects delivered across Gujarat.",
+    },
+  ],
+  subsidyHighlights: [
+    {
+      title: "Central & state rooftop benefits",
+      description:
+        "We guide you through eligible residential rooftop subsidy schemes and help you understand what applies to your property in Gujarat.",
+    },
+    {
+      title: "DISCOM & net-meter support",
+      description:
+        "From application to net-meter commissioning, we handle paperwork so you are not stuck in approval delays.",
+    },
+    {
+      title: "Clear cost breakdown",
+      description:
+        "Before you decide, we explain system size, estimated generation, and expected bill savings in simple language.",
+    },
+    {
+      title: "Free site visit",
+      description:
+        "Our team visits your roof in Surat & nearby areas, checks shadow and load, then recommends the right kW system.",
+    },
+  ],
+  warrantyHighlights: [
+    {
+      title: "Panel performance warranty",
+      description:
+        "We install brand panels backed by manufacturer performance warranty (typically up to 25 years as per brand terms).",
+    },
+    {
+      title: "Inverter & workmanship cover",
+      description:
+        "Inverter warranty follows the brand policy. Our installation workmanship is supported with responsive after-sales service.",
+    },
+    {
+      title: "AMC & maintenance options",
+      description:
+        "Optional cleaning and health-check visits keep generation high and catch issues early.",
+    },
+    {
+      title: "Dedicated local support",
+      description:
+        "Call or WhatsApp Pandav Solar for troubleshooting — a local Surat team that knows your installation.",
+    },
   ],
   propertyTypes: ["Residential", "Commercial", "Industrial"],
   processSteps: [
@@ -107,10 +227,120 @@ export const siteConfig = {
     { name: "Amit S.", location: "Vesu, Surat", text: "Good quality panels and friendly support after installation. Happy with Pandav Solar." },
   ],
   services: [
-    { title: "Solar Rooftop EPC", desc: "Grid-connected rooftop systems for home, shop & industry.", image: rooftop, link: "/services" },
-    { title: "Liaisoning & Approvals", desc: "DISCOM registration, net-meter & government paperwork.", image: instalation, link: "/services" },
-    { title: "Solar Water Heater", desc: "Hot water solutions for homes, hotels & hostels.", image: waterHeater, link: "/services" },
+    {
+      title: "Residential Rooftop Solar",
+      desc: "Clean power for homes — lower bills with a grid-tied rooftop system sized for your load.",
+      image: rooftop,
+      link: "/services",
+      bullets: [
+        "Custom kW design for your roof",
+        "Subsidy guidance & net-meter help",
+        "Neat wiring and safe mounting",
+      ],
+    },
+    {
+      title: "Commercial & Industrial Solar",
+      desc: "Scalable rooftop EPC for shops, factories, hotels, and commercial buildings.",
+      image: serviceImg,
+      link: "/services",
+      bullets: [
+        "High-efficiency commercial systems",
+        "Reduced operating electricity cost",
+        "Turnkey survey to commissioning",
+      ],
+    },
+    {
+      title: "Ground-Mounted Solutions",
+      desc: "Ground-mounted plants for larger plots needing reliable long-term generation.",
+      image: solarBg,
+      link: "/services",
+      bullets: [
+        "Structure & layout planning",
+        "Suitable for open land projects",
+        "Durable mounting & cabling",
+      ],
+    },
+    {
+      title: "Complete Installation Services",
+      desc: "Professional panel, inverter, and electrical setup with quality materials.",
+      image: instalation,
+      link: "/services",
+      bullets: [
+        "Certified installation practices",
+        "Inverter & ACDB/DCDB setup",
+        "Safety-first commissioning",
+      ],
+    },
+    {
+      title: "Maintenance & AMC Support",
+      desc: "Keep generation high with cleaning, inspections, and quick fault support.",
+      image: aboutImg,
+      link: "/services",
+      bullets: [
+        "Panel cleaning schedules",
+        "Performance health checks",
+        "Local Surat response team",
+      ],
+    },
+    {
+      title: "Liaisoning & Consulting",
+      desc: "DISCOM approvals, documentation, and honest consulting for the right system.",
+      image: waterHeater,
+      link: "/services",
+      bullets: [
+        "New connection & registrations",
+        "Government paperwork support",
+        "Solar water heater options",
+      ],
+    },
   ],
+  pageMeta: {
+    home: {
+      title: "Pandav Solar | Best Solar Company in Surat & Gujarat",
+      description:
+        "Pandav Solar — expert rooftop solar installation, subsidy help, and free site visit in Surat & Gujarat. Call +91 70692 16551.",
+    },
+    services: {
+      title: "Solar Services in Surat | Pandav Solar",
+      description:
+        "Residential, commercial & industrial solar rooftop EPC, liaisoning, maintenance, and solar water heaters in Surat.",
+    },
+    about: {
+      title: "About Pandav Solar | Trusted Solar Experts in Surat",
+      description:
+        "Meet Pandav Solar — local Katargam team delivering honest solar installations across Surat and Gujarat.",
+    },
+    projects: {
+      title: "Solar Projects in Surat | Pandav Solar Gallery",
+      description:
+        "See recent residential, commercial, and industrial solar installations completed by Pandav Solar in Surat & Gujarat.",
+    },
+    contact: {
+      title: "Contact Pandav Solar | Free Solar Assessment",
+      description:
+        "Call, WhatsApp, or message Pandav Solar for a free solar assessment in Surat. We reply within 24 hours.",
+    },
+    inquiry: {
+      title: "Get a Free Solar Quote | Pandav Solar Inquiry",
+      description:
+        "Request a free site visit and solar quote from Pandav Solar. Home, shop, and factory installations in Surat.",
+    },
+    faq: {
+      title: "Solar FAQ | Pandav Solar Surat",
+      description:
+        "Answers about solar cost, subsidy, net meter, warranty, and installation timeline from Pandav Solar.",
+    },
+    warranty: {
+      title: "Solar Warranty & Support | Pandav Solar",
+      description:
+        "Learn about panel, inverter, and workmanship support from Pandav Solar — local after-sales care in Surat.",
+    },
+    subsidy: {
+      title: "Solar Subsidy Help in Gujarat | Pandav Solar",
+      description:
+        "Get guidance on rooftop solar subsidy, DISCOM paperwork, and net-meter support with Pandav Solar in Surat.",
+    },
+  },
 };
 
 export const getWhatsAppUrl = (message = "") => {

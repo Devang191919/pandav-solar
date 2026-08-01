@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { siteConfig } from "../config/siteConfig";
 import BannerSec from "../components/BennerSec";
 import FAQAccordion from "../components/FAQAccordion";
+import PageMeta from "../components/PageMeta";
 
 const faqData = [
   {
@@ -17,7 +19,7 @@ const faqData = [
   {
     question: "Is government subsidy available?",
     answer:
-      "Yes! We help you understand and apply for all eligible solar subsidies in Gujarat.",
+      "Yes! We help you understand and apply for all eligible solar subsidies in Gujarat. Visit our Subsidy Help page for more details.",
   },
   {
     question: "Do you offer maintenance?",
@@ -27,7 +29,7 @@ const faqData = [
   {
     question: "What warranty do you provide?",
     answer:
-      "Solar panels come with up to 25-year performance warranty. We use trusted brands only.",
+      "Solar panels come with up to 25-year performance warranty. We use trusted brands only. See our Warranty page for support details.",
   },
 ];
 
@@ -53,7 +55,9 @@ const FAQ = ({ embedded = false }) => {
       <>
         <div className="text-center mb-6">
           <span className="section-badge">FAQ</span>
-          <h2 className="mt-3 text-2xl font-bold text-solar-900">Common Questions</h2>
+          <h2 className="mt-3 text-3xl md:text-4xl xl:text-5xl font-bold text-solar-900 tracking-tight">
+            Common Questions
+          </h2>
         </div>
         {list}
       </>
@@ -62,10 +66,19 @@ const FAQ = ({ embedded = false }) => {
 
   return (
     <div>
+      <PageMeta pageKey="faq" />
       <BannerSec title="FAQ" subtitle="FAQ" bgImage={siteConfig.images.service} />
       <div className="container-main section-block">
         <p className="text-center text-solar-700 mb-6 text-sm">
-          Answers to questions our customers ask most often.
+          Answers to questions our customers ask most often. Also see{" "}
+          <NavLink to="/subsidy" className="text-solar-green font-medium hover:underline">
+            Subsidy Help
+          </NavLink>{" "}
+          and{" "}
+          <NavLink to="/warranty" className="text-solar-green font-medium hover:underline">
+            Warranty
+          </NavLink>
+          .
         </p>
         {list}
       </div>

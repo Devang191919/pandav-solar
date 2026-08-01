@@ -56,15 +56,17 @@ const StatItem = ({ item, animate }) => {
   const ItemIcon = item.icon;
 
   return (
-    <div className="flex flex-col items-center text-center px-2 md:px-6">
-      <div className="w-12 h-12 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center mb-3">
-        <ItemIcon className="text-solar-green text-xl" />
+    <div className="flex flex-col items-center text-center px-1.5 sm:px-2 md:px-6">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center mb-2 sm:mb-3">
+        <ItemIcon className="text-solar-green text-lg sm:text-xl" />
       </div>
-      <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-solar-900 tabular-nums leading-none">
+      <p className="text-xl sm:text-3xl md:text-4xl font-bold text-solar-900 tabular-nums leading-none">
         {count}
         <span className="text-solar-green">{item.suffix}</span>
       </p>
-      <p className="mt-2 text-sm font-medium text-solar-700">{item.label}</p>
+      <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm font-medium text-solar-700">
+        {item.label}
+      </p>
     </div>
   );
 };
@@ -92,13 +94,17 @@ const TrustBar = ({ overlap = false }) => {
       ref={ref}
       className={
         overlap
-          ? "relative z-10 -mt-6 sm:-mt-10 md:-mt-14 pb-2"
+          ? "relative z-10 mt-4 pb-2 md:-mt-12 lg:-mt-16"
           : "bg-slate-50 py-8 sm:py-10 md:py-12"
       }
     >
       <div className="container-main">
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0_0_0_0.08)] px-4 py-6 sm:px-5 sm:py-8 md:px-8 md:py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 sm:gap-y-8 md:gap-y-0 md:divide-x md:divide-slate-200">
+        <div
+          className={`bg-white rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0_0_0_0.08)] px-3 py-4 sm:px-5 sm:py-8 md:px-8 md:py-10 lg:px-10 lg:py-11 reveal reveal--up ${
+            animate ? "reveal--in" : ""
+          }`}
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 sm:gap-y-8 md:gap-y-0 md:divide-x md:divide-slate-200">
             {statItems.map((item) => (
               <StatItem key={item.label} item={item} animate={animate} />
             ))}

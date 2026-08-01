@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaWhatsapp } from "react-icons/fa6";
+import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa";
 import { siteConfig } from "../config/siteConfig";
 import ContactLink from "./ContactLink";
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-50 text-solar-700 border-t border-slate-200 pb-[calc(5rem+env(safe-area-inset-bottom,0))] lg:pb-8">
+    <footer className="bg-slate-50 text-solar-700 border-t border-slate-200 pb-8 lg:pb-8">
       <div className="container-main pt-8 sm:pt-12 pb-6 sm:pb-8">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-slate-200">
           <div className="col-span-2 md:col-span-1">
@@ -18,6 +18,30 @@ const Footer = () => {
             <p className="text-sm mt-2 leading-relaxed">
               Trusted solar installation & EPC services in Surat and across Gujarat.
             </p>
+            <div className="flex items-center gap-2 mt-4">
+              {siteConfig.social?.instagram && (
+                <a
+                  href={siteConfig.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-solar-700 hover:text-solar-green hover:border-solar-green/40 transition"
+                  aria-label="Instagram"
+                >
+                  <FaInstagram />
+                </a>
+              )}
+              {siteConfig.social?.facebook && (
+                <a
+                  href={siteConfig.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-solar-700 hover:text-solar-green hover:border-solar-green/40 transition"
+                  aria-label="Facebook"
+                >
+                  <FaFacebookF />
+                </a>
+              )}
+            </div>
           </div>
 
           <div>
@@ -26,6 +50,7 @@ const Footer = () => {
               {[
                 { to: "/", label: "Home" },
                 { to: "/services", label: "Services" },
+                { to: "/projects", label: "Projects" },
                 { to: "/about", label: "About" },
                 { to: "/inquiry", label: "Get a Quote" },
                 { to: "/faq", label: "FAQ" },
@@ -40,16 +65,29 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="font-semibold text-solar-900 mb-3">Services</h3>
+            <h3 className="font-semibold text-solar-900 mb-3">Services & Info</h3>
             <ul className="space-y-2 text-sm">
-              <li>Solar Rooftop EPC</li>
-              <li>Liaisoning & Approvals</li>
-              <li>Solar Water Heater</li>
-              <li>Maintenance & Support</li>
+              {siteConfig.services.slice(0, 4).map((s) => (
+                <li key={s.title}>
+                  <NavLink to="/services" className="hover:text-solar-green transition">
+                    {s.title}
+                  </NavLink>
+                </li>
+              ))}
+              <li>
+                <NavLink to="/warranty" className="hover:text-solar-green transition">
+                  Warranty
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/subsidy" className="hover:text-solar-green transition">
+                  Subsidy Help
+                </NavLink>
+              </li>
             </ul>
           </div>
 
-          <div>
+          <div className="col-span-2 sm:col-span-1">
             <h3 className="font-semibold text-solar-900 mb-3">Contact Us</h3>
             <div className="space-y-2 text-sm">
               <ContactLink type="phone" className="block hover:text-solar-green">

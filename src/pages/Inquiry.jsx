@@ -5,10 +5,12 @@ import { siteConfig } from "../config/siteConfig";
 import BannerSec from "../components/BennerSec";
 import InquiryForm from "../components/InquiryForm";
 import ContactLink from "../components/ContactLink";
+import PageMeta from "../components/PageMeta";
 
 const Inquiry = () => {
   return (
     <div>
+      <PageMeta pageKey="inquiry" />
       <BannerSec title="Get a Free Quote" subtitle="Inquiry" bgImage={siteConfig.images.service} />
 
       <div className="container-main section-block">
