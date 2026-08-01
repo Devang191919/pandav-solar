@@ -22,20 +22,21 @@ const Home = () => {
       <HeroSection />
       <TrustBar />
 
-      <section className="section-block bg-white">
-        <div className="container-main">
-          <ScrollReveal className="text-center mb-6 sm:mb-8">
+      <section className="relative section-block overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-white pointer-events-none" />
+        <div className="relative container-main">
+          <ScrollReveal className="text-center mb-8 sm:mb-10">
             <span className="section-badge">Our Services</span>
             <h2 className="mt-3 text-3xl md:text-4xl xl:text-5xl font-bold text-solar-900 tracking-tight">
               Solar Solutions for Every Need
             </h2>
             <p className="mt-3 text-solar-700 text-base md:text-lg xl:text-xl max-w-2xl mx-auto leading-relaxed">
-              Home, shop, factory or hotel — we install and maintain it all.
+              Home, shop, factory or hotel — complete EPC, approvals, and long-term support.
             </p>
           </ScrollReveal>
           <ServiceCards />
-          <ScrollReveal className="text-center mt-6" delay={200}>
-            <NavLink to="/services" className="btn-secondary text-sm">
+          <ScrollReveal className="text-center mt-8" delay={200}>
+            <NavLink to="/services" className="btn-secondary text-sm sm:text-base">
               View All Services →
             </NavLink>
           </ScrollReveal>

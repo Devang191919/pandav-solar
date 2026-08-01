@@ -24,30 +24,10 @@ const useCountUp = (end, duration = 1800, start = false) => {
 };
 
 const statItems = [
-  {
-    icon: FaHardHat,
-    key: "customers",
-    suffix: "+",
-    label: "Projects Done",
-  },
-  {
-    icon: FaAward,
-    key: "years",
-    suffix: "+",
-    label: "Years Experience",
-  },
-  {
-    icon: FaSolarPanel,
-    key: "mw",
-    suffix: "+ MW",
-    label: "Solar Installed",
-  },
-  {
-    icon: FaUsers,
-    key: "workforce",
-    suffix: "+",
-    label: "Expert Team",
-  },
+  { icon: FaHardHat, key: "customers", suffix: "+", label: "Projects Completed" },
+  { icon: FaAward, key: "years", suffix: "+", label: "Years Experience" },
+  { icon: FaSolarPanel, key: "mw", suffix: "+ MW", label: "Solar Installed" },
+  { icon: FaUsers, key: "workforce", suffix: "+", label: "Expert Team" },
 ];
 
 const StatItem = ({ item, animate }) => {
@@ -56,22 +36,22 @@ const StatItem = ({ item, animate }) => {
   const ItemIcon = item.icon;
 
   return (
-    <div className="flex flex-col items-center text-center px-1.5 sm:px-2 md:px-6">
-      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center mb-2 sm:mb-3">
-        <ItemIcon className="text-solar-green text-lg sm:text-xl" />
+    <div className="flex flex-col items-center text-center px-2 sm:px-3 md:px-6 py-2">
+      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mb-3 sm:mb-4">
+        <ItemIcon className="text-solar-green-light text-xl sm:text-2xl" />
       </div>
-      <p className="text-xl sm:text-3xl md:text-4xl font-bold text-solar-900 tabular-nums leading-none">
+      <p className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tabular-nums leading-none tracking-tight">
         {count}
-        <span className="text-solar-green">{item.suffix}</span>
+        <span className="text-solar-green-light">{item.suffix}</span>
       </p>
-      <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm font-medium text-solar-700">
+      <p className="mt-2 sm:mt-2.5 text-xs sm:text-sm font-medium text-slate-300">
         {item.label}
       </p>
     </div>
   );
 };
 
-const TrustBar = ({ overlap = false }) => {
+const TrustBar = () => {
   const ref = useRef(null);
   const [animate, setAnimate] = useState(false);
 
@@ -83,28 +63,22 @@ const TrustBar = ({ overlap = false }) => {
           observer.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.2 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section
-      ref={ref}
-      className={
-        overlap
-          ? "relative z-10 mt-4 pb-2 md:-mt-12 lg:-mt-16"
-          : "bg-slate-50 py-8 sm:py-10 md:py-12"
-      }
-    >
+    <section ref={ref} className="relative z-10 -mt-6 sm:-mt-8 md:-mt-10 pb-2">
       <div className="container-main">
         <div
-          className={`bg-white rounded-2xl border border-slate-200 shadow-[0_8px_30px_rgb(0_0_0_0.08)] px-3 py-4 sm:px-5 sm:py-8 md:px-8 md:py-10 lg:px-10 lg:py-11 reveal reveal--up ${
+          className={`relative overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-900 border border-slate-700/80 shadow-[0_20px_50px_rgb(0_0_0_/_0.25)] px-3 py-6 sm:px-6 sm:py-9 md:px-8 md:py-11 reveal reveal--up ${
             animate ? "reveal--in" : ""
           }`}
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-4 sm:gap-y-8 md:gap-y-0 md:divide-x md:divide-slate-200">
+          <div className="absolute inset-0 bg-gradient-to-r from-solar-green/20 via-transparent to-emerald-500/10 pointer-events-none" />
+          <div className="relative grid grid-cols-2 md:grid-cols-4 gap-y-6 sm:gap-y-8 md:gap-y-0 md:divide-x md:divide-white/10">
             {statItems.map((item) => (
               <StatItem key={item.label} item={item} animate={animate} />
             ))}
